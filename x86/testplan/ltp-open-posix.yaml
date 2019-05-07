@@ -1,8 +1,6 @@
 timeouts:
   job:
-    minutes: 75
-  action:
-    minutes: 10
+    minutes: 85
   connection:
     minutes: 2
 context:
@@ -86,5 +84,3 @@ actions:
       name: ltp-open-posix-tests
       parameters:
         SKIP_INSTALL: 'true'
-      timeout:
-        minutes: 75

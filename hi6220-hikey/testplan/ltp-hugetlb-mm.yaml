@@ -1,8 +1,6 @@
 timeouts:
   job:
-    minutes: 60
-  action:
-    minutes: 10
+    minutes: 70
   connection:
     minutes: 2
 context:
@@ -141,8 +139,6 @@ actions:
           - cat /sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq || true
       name: prep-inline
       path: inline/prep.yaml
-      timeout:
-        minutes: 10
     - repository: https://github.com/Linaro/test-definitions.git
       from: git
       path: automated/linux/ltp/ltp.yaml
@@ -156,8 +152,6 @@ actions:
         TIMEOUT_MULTIPLIER: 3
         LTP_TMPDIR: /scratch
       name: ltp-hugetlb-tests
-      timeout:
-        minutes: 55
     - repository: https://github.com/Linaro/test-definitions.git
       from: git
       path: automated/linux/ltp/ltp.yaml
@@ -171,5 +165,3 @@ actions:
         TIMEOUT_MULTIPLIER: 3
         LTP_TMPDIR: /scratch
       name: ltp-mm-tests
-      timeout:
-        minutes: 55

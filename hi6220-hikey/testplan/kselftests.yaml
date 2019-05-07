@@ -1,8 +1,6 @@
 timeouts:
   job:
-    minutes: 55
-  action:
-    minutes: 10
+    minutes: 65
   connection:
     minutes: 2
 context:
@@ -138,8 +136,6 @@ actions:
           - cat /sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq || true
       name: prep-inline
       path: inline/prep.yaml
-      timeout:
-        minutes: 10
     - from: inline
       repository:
         metadata:
@@ -161,5 +157,3 @@ actions:
         BOARD: hi6220-hikey
         BRANCH: mainline
         ENVIRONMENT: production
-      timeout:
-        minutes: 55

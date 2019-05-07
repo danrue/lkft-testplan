@@ -1,8 +1,6 @@
 timeouts:
   job:
-    minutes: 25
-  action:
-    minutes: 10
+    minutes: 35
   connection:
     minutes: 2
 context:
@@ -90,5 +88,3 @@ actions:
       name: v4l2-compliance
       parameters:
         VIDEO_DRIVER: vivid.ko
-      timeout:
-        minutes: 10

@@ -1,8 +1,6 @@
 timeouts:
   job:
-    minutes: 25
-  action:
-    minutes: 10
+    minutes: 35
   connection:
     minutes: 2
 context:
@@ -107,5 +105,3 @@ actions:
       name: kvm-unit-tests
       parameters:
         SKIP_INSTALL: 'true'
-      timeout:
-        minutes: 20

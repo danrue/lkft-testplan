@@ -1,8 +1,6 @@
 timeouts:
   job:
-    minutes: 55
-  action:
-    minutes: 10
+    minutes: 65
   connection:
     minutes: 2
 context:
@@ -108,5 +106,3 @@ actions:
         BOARD: juno-r2
         BRANCH: mainline
         ENVIRONMENT: production
-      timeout:
-        minutes: 55

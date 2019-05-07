@@ -1,8 +1,6 @@
 timeouts:
   job:
-    minutes: 75
-  action:
-    minutes: 10
+    minutes: 85
   connection:
     minutes: 2
 context:
@@ -89,5 +87,3 @@ actions:
         TESTS: throughput replayed-startup
         TEST_DEV: "'$(lava-target-storage SATA || lava-target-storage USB)'"
         S_PATH: /opt/S-suite/
-      timeout:
-        minutes: 75

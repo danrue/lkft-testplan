@@ -1,8 +1,6 @@
 timeouts:
   job:
-    minutes: 30
-  action:
-    minutes: 10
+    minutes: 40
   connection:
     minutes: 2
 context:
@@ -144,8 +142,6 @@ actions:
         TIMEOUT_MULTIPLIER: 3
         LTP_TMPDIR: /scratch
       name: ltp-cap_bounds-tests
-      timeout:
-        minutes: 25
     - repository: https://github.com/Linaro/test-definitions.git
       from: git
       path: automated/linux/ltp/ltp.yaml
@@ -159,8 +155,6 @@ actions:
         TIMEOUT_MULTIPLIER: 3
         LTP_TMPDIR: /scratch
       name: ltp-cpuhotplug-tests
-      timeout:
-        minutes: 25
     - repository: https://github.com/Linaro/test-definitions.git
       from: git
       path: automated/linux/ltp/ltp.yaml
@@ -174,8 +168,6 @@ actions:
         TIMEOUT_MULTIPLIER: 3
         LTP_TMPDIR: /scratch
       name: ltp-fcntl-locktests-tests
-      timeout:
-        minutes: 25
     - repository: https://github.com/Linaro/test-definitions.git
       from: git
       path: automated/linux/ltp/ltp.yaml
@@ -189,8 +181,6 @@ actions:
         TIMEOUT_MULTIPLIER: 3
         LTP_TMPDIR: /scratch
       name: ltp-filecaps-tests
-      timeout:
-        minutes: 25
     - repository: https://github.com/Linaro/test-definitions.git
       from: git
       path: automated/linux/ltp/ltp.yaml
@@ -204,8 +194,6 @@ actions:
         TIMEOUT_MULTIPLIER: 3
         LTP_TMPDIR: /scratch
       name: ltp-fs_bind-tests
-      timeout:
-        minutes: 25
     - repository: https://github.com/Linaro/test-definitions.git
       from: git
       path: automated/linux/ltp/ltp.yaml
@@ -219,8 +207,6 @@ actions:
         TIMEOUT_MULTIPLIER: 3
         LTP_TMPDIR: /scratch
       name: ltp-fs_perms_simple-tests
-      timeout:
-        minutes: 25
     - repository: https://github.com/Linaro/test-definitions.git
       from: git
       path: automated/linux/ltp/ltp.yaml
@@ -234,8 +220,6 @@ actions:
         TIMEOUT_MULTIPLIER: 3
         LTP_TMPDIR: /scratch
       name: ltp-fsx-tests
-      timeout:
-        minutes: 25
     - repository: https://github.com/Linaro/test-definitions.git
       from: git
       path: automated/linux/ltp/ltp.yaml
@@ -249,8 +233,6 @@ actions:
         TIMEOUT_MULTIPLIER: 3
         LTP_TMPDIR: /scratch
       name: ltp-nptl-tests
-      timeout:
-        minutes: 25
     - repository: https://github.com/Linaro/test-definitions.git
       from: git
       path: automated/linux/ltp/ltp.yaml
@@ -264,8 +246,6 @@ actions:
         TIMEOUT_MULTIPLIER: 3
         LTP_TMPDIR: /scratch
       name: ltp-pty-tests
-      timeout:
-        minutes: 25
     - repository: https://github.com/Linaro/test-definitions.git
       from: git
       path: automated/linux/ltp/ltp.yaml
@@ -279,5 +259,3 @@ actions:
         TIMEOUT_MULTIPLIER: 3
         LTP_TMPDIR: /scratch
       name: ltp-securebits-tests
-      timeout:
-        minutes: 25

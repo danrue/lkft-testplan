@@ -1,8 +1,6 @@
 timeouts:
   job:
-    minutes: 20
-  action:
-    minutes: 10
+    minutes: 30
   connection:
     minutes: 2
 context:
@@ -120,5 +118,3 @@ actions:
         TIMEOUT_MULTIPLIER: 3
         LTP_TMPDIR: /scratch
       name: ltp-timers-tests
-      timeout:
-        minutes: 15

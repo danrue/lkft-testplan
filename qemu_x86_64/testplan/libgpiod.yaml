@@ -1,8 +1,6 @@
 timeouts:
   job:
-    minutes: 25
-  action:
-    minutes: 10
+    minutes: 35
   connection:
     minutes: 2
 context:
@@ -75,5 +73,3 @@ actions:
       from: git
       path: automated/linux/gpiod/gpiod.yaml
       name: libgpiod
-      timeout:
-        minutes: 20

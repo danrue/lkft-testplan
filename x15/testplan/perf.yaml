@@ -1,8 +1,6 @@
 timeouts:
   job:
-    minutes: 30
-  action:
-    minutes: 10
+    minutes: 40
   connection:
     minutes: 2
 context:
@@ -99,5 +97,3 @@ actions:
       name: perf
       parameters:
         SKIP_INSTALL: 'true'
-      timeout:
-        minutes: 10
