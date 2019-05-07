@@ -1,0 +1,132 @@
+timeouts:
+  job:
+    minutes: 20
+  action:
+    minutes: 10
+  connection:
+    minutes: 2
+context:
+  test_character_delay: 10
+device_type: dragonboard-410c
+job_name: lkft-ltp-timers-master-346
+priority: 50
+visibility: public
+metadata:
+  git branch: master
+  git repo: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+  git commit: ff5abbe799e29099695cb8b5b2f198dd8b8bdf26
+  git describe: v4.14-rc4-84-gff5abbe799e2
+  make_kernelversion: 4.14.0-rc4
+  kernel-config: http://snapshots.linaro.org/openembedded/lkft/morty/hikey/rpb/linux-mainline/346/config
+  kernel-defconfig: http://snapshots.linaro.org/openembedded/lkft/morty/hikey/rpb/linux-mainline/346/defconfig
+  build-url: https://ci.linaro.org/job/openembedded-lkft-linux-mainline/DISTRO=rpb,MACHINE=hikey,label=docker-stretch-amd64/346/
+  build-location: http://snapshots.linaro.org/openembedded/lkft/morty/hikey/rpb/linux-mainline/346
+  toolchain: arm-linaro-linux-gnueabi linaro-6.2
+  series: lkft
+  email-notification: ''
+  ltp-timers-tests__url: git://github.com/linux-test-project/ltp.git
+  ltp-timers-tests__version: '20170929'
+  ltp-timers-tests__revision: e671f2a13c695bbd87f7dfec2954ca7e3c43f377
+protocols:
+  lava-lxc:
+    name: lxc-target
+    template: debian
+    distribution: debian
+    release: jessie
+    arch: amd64
+    mirror: http://deb.debian.org/debian
+actions:
+- deploy:
+    namespace: tlxc
+    timeout:
+      minutes: 15
+    to: lxc
+    packages:
+    - wget
+    - unzip
+    os: debian
+- boot:
+    namespace: tlxc
+    prompts:
+    - root@(.*):/#
+    timeout:
+      minutes: 5
+    method: lxc
+- test:
+    namespace: tlxc
+    timeout:
+      minutes: 10
+    definitions:
+    - repository: https://github.com/Linaro/test-definitions.git
+      from: git
+      path: automated/linux/android-platform-tools/install.yaml
+      name: install-android-platform-tools-r2600
+      parameters:
+        LINK: https://dl.google.com/android/repository/platform-tools_r26.0.0-linux.zip
+- deploy:
+    timeout:
+      minutes: 25
+    to: fastboot
+    namespace: target
+    connection: lxc
+    images:
+      boot:
+        url: http://snapshots.linaro.org/openembedded/lkft/morty/hikey/rpb/linux-mainline/346/boot-0.0+AUTOINC+06e4def583-fb1158a365-r0-hikey-20171012090440-346.uefi.img
+      rootfs:
+        url: http://snapshots.linaro.org/openembedded/lkft/morty/hikey/rpb/linux-mainline/346/rpb-console-image-hikey-20171012090440-346.rootfs.img.gz
+        compression: gz
+        apply-overlay: true
+    os: oe
+    protocols:
+      lava-lxc:
+      - action: fastboot-deploy
+        request: pre-power-command
+        timeout:
+          minutes: 2
+- boot:
+    namespace: target
+    auto_login:
+      login_prompt: 'login:'
+      username: linaro
+      login_commands:
+        # Become super user to run tests
+      - su
+    prompts:
+    - root@(.*):/#
+    - root@dragonboard-410c:~#
+    - dragonboard-410c:/home/linaro#
+    - dragonboard-410c:~\$
+    timeout:
+      minutes: 5
+    method: fastboot
+- test:
+    namespace: target
+    timeout:
+      minutes: 20
+    definitions:
+    - from: inline
+      repository:
+        metadata:
+          format: Lava-Test Test Definition 1.0
+          name: timesync-off
+          description: Disable systemd time sync services
+        run:
+          steps:
+          - systemctl stop systemd-timesyncd || true
+      name: timesync-off
+      path: inline/timesync-off.yaml
+    - repository: https://github.com/Linaro/test-definitions.git
+      from: git
+      path: automated/linux/ltp/ltp.yaml
+      parameters:
+        SKIP_INSTALL: 'true'
+        TST_CMDFILES: timers
+        SKIPFILE: skipfile-lkft.yaml
+        BOARD: dragonboard-410c
+        BRANCH: mainline
+        ENVIRONMENT: production
+        TIMEOUT_MULTIPLIER: 3
+        LTP_TMPDIR: /scratch
+      name: ltp-timers-tests
+      timeout:
+        minutes: 15
